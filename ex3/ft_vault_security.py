@@ -1,6 +1,8 @@
 
 #  only the firstst param is obligatory
-def secure_archive(filename: str, action: str ="read" , content: str ="") -> tuple[bool, str]:
+def secure_archive(
+        filename: str, action: str = "read", content: str = ""
+        ) -> tuple[bool, str]:
     try:
         if action == 'read':
             with open(filename, "r") as f:
@@ -8,8 +10,8 @@ def secure_archive(filename: str, action: str ="read" , content: str ="") -> tup
             return (True, content)
         elif action == 'write':
             with open(filename, "w") as f:
-                f.write(content) #it starts as an empty string
-                content = 'Content successfully written to file'      
+                f.write(content)  # it starts as an empty string
+                content = 'Content successfully written to file'
             return (True, content)
         else:
             return (False, "Unknown action")
@@ -19,6 +21,8 @@ def secure_archive(filename: str, action: str ="read" , content: str ="") -> tup
 
 
 def main() -> None:
+    print("=== Cyber Archives Security ===")
+    print()
     print("Using 'secure_archive' to read from a nonexistent file:")
     print(secure_archive("/not/existing/file"))
     print()
@@ -37,6 +41,7 @@ def main() -> None:
     print(secure_archive("new_file.txt", "write", result[1]))
     # content[1] -> only reads2nd element of the tuple --> True, content
     print()
+
 
 if __name__ == "__main__":
     main()
