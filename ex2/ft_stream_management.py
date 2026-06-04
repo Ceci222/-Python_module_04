@@ -11,7 +11,7 @@ else:
 
 
 def main() -> None:
-    print("=== Cyber Archives Recovery ===")
+    print("=== Cyber Archives Recovery & Preservation ===")
     print(f"Accessing file '{file}'")
 
     try:
@@ -41,11 +41,15 @@ def main() -> None:
         print()
         print("---")
     except OSError as e:
-        print(f"Error opening file '{file}': {e}")
+        print(f"[STDERR] Error opening file '{file}': {e}", file=sys.stderr)
         print()
+        sys.exit(1)
 
     try:
-        new_file_name = input("Enter new file name (or empty): ")
+        print("Enter new file name (or empty): ", end="", flush=True)
+        #  end avoids '\n' so it prints and receoves on same line
+        # flush=True -> forces the print before the next '\n'
+        new_file_name = sys.stdin.readline().rstrip("\n")
 
         if new_file_name == "":
             print("Not saving data.")
@@ -59,7 +63,9 @@ def main() -> None:
             print()
             f.close()
     except OSError as e:
-        print(f"Error opening file '{new_file_name}': {e}")
+        print(f"[STDERR] Error opening file '{new_file_name}': {e}",
+              file=sys.stderr)
+        print("Data not saved.")
         print()
 
 
